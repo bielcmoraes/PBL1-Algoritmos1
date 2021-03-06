@@ -1,0 +1,23 @@
+Nome, CPF, sexo, grupo_prioritário, dados, horário, fabricante,  lote, dose.
+
+
+vacinados_total <- Quantidade de pessoas vacinadas
+doses_total <- Quantidade total de doses aplicadas
+dose1 <- Quantidade de 1ª dose aplicada
+dose2 <-Quantidade de 2ª dose aplicada
+vacinados_coronavac <- Quantidade de doses de Coronavac aplicadas
+vacinados_astrazeneca <- Quantidade de doses de Astrazeneca aplicadas
+coronavac_percentual <- (vacinados_total - vacinados_astrazeneca) / 100
+astrazeneca_percentual <- (vacinados_total - vacinados_coronavac) / 100
+
+idosos <- quantidade de pessoas no grupo prioritário de idosos
+idosos_percentual <- (idosos - vacinados_total) / 100
+
+horario_manha <- quantidade de vacinas aplicadas pela manhã
+tarde_percentual <- (horario_manha - doses_total) / 100
+manha_percentual <- tarde_percentual - 100
+
+vacinados_masculino <- quantidade de vacinados do sexo masculino
+feminino_percentual <- (vacinados_masculino - vacinados_total) / 100
+masculino_percentual <- feminino_percentual - 100
+
