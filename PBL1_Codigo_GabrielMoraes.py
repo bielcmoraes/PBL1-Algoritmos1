@@ -41,15 +41,12 @@ def Cadastro():
     while sexo < 1 and sexo > 2:
         print('Escolha uma das opções válidas.')
         sexo = input('Digite [1] para sexo Masculino ou [2] para sexo Feminino\n>>>')
-        
-        
+         
     if sexo == 1:
         sexo = 'Masculino'
-
-    if sexo == 2:
+    else:
         sexo = 'Feminino'
     
-
     print('Digite o número correspondente ao grupo prioritário da pessoa vacinada.')
     print('[1] Trabalhadores da saúde\n[2] Idosos acima de 75 anos\n[3] Idosos ILPI acima de 60 anos')
     print('[4] Pessoas acamadas\n[5] Deficiente institucionalizados\n[6] Indigenas aldeados')
@@ -60,67 +57,75 @@ def Cadastro():
     print('[16] Trabalhadores de Transporte Aéreo\n[17] Trabalhadores portuários')
     print('[18] População Privada de Liberdade')
     
-    grupo_priotario = input('[19] Funcionários do sistema de Privação de Liberdade\n\n>>>')
+    grupoPrioritario = input('[19] Funcionários do sistema de Privação de Liberdade\n>>>')
+    teste_grupoPrioritario = grupoPrioritario.isdigit()
 
-    if grupo_priotario == 1:
-        grupo_priotario = 'Trabalhadores da saúde'
-
-    elif grupo_priotario == 2:
-        grupo_priotario = 'Idoso > 75 anos'
+    while teste_grupoPrioritario is False:
+        print('Escolha uma opção válida.')
+        grupoPrioritario = input('>>>')
+        teste_grupoPrioritario = grupoPrioritario.isdigit()
     
-    elif grupo_priotario == 3:
-        grupo_priotario = 'Idosos ILPI > 60 anos'
-
-    elif grupo_priotario == 4:
-        grupo_priotario = 'Pessoas acamadas'
+    grupoPrioritario = int(grupoPrioritario)
+    while 1 > grupoPrioritario > 19:
+        print('Escolha uma opção válida.')
+        grupoPrioritario('>>>')
     
-    elif grupo_priotario == 5:
-        grupo_priotario = 'Deficiente institucionalizados'
+    if grupoPrioritario == 1:
+        grupoPrioritario = 'Trabalhadores da saúde'
+
+    elif grupoPrioritario == 2:
+        grupoPrioritario = 'Idoso > 75 anos'
     
-    elif grupo_priotario == 6:
-        grupo_priotario = 'Indigenas aldeados'
+    elif grupoPrioritario == 3:
+        grupoPrioritario = 'Idosos ILPI > 60 anos'
+
+    elif grupoPrioritario == 4:
+        grupoPrioritario = 'Pessoas acamadas'
     
-    elif grupo_priotario == 7:
-        grupo_priotario = 'Povos de comunidades tradicionais (quilombolas) e ribeirinhas'
-
-    elif grupo_priotario == 8:
-        grupo_priotario = 'Idosos de 60 a 74 anos'
-
-    elif grupo_priotario == 9:
-        grupo_priotario = 'Comorbidades'
-
-    elif grupo_priotario == 10:
-        grupo_priotario = 'Pessoas em situação de rua'
-
-    elif grupo_priotario == 11:
-        grupo_priotario = 'Forças de segurança e salvamento'
-
-    elif grupo_priotario == 12:
-        grupo_priotario = 'Trabalhadores da educação'
+    elif grupoPrioritario == 5:
+        grupoPrioritario = 'Deficiente institucionalizados'
     
-    elif grupo_priotario == 13:
-        grupo_priotario = 'Pessoas com deficiência permanentemente severa'
-
-    elif grupo_priotario == 14:
-        grupo_priotario = 'Caminhoneiros'
-
-    elif grupo_priotario == 15:
-        grupo_priotario = 'Trabalhadores do Transporte Coletivo Rodoviário e Metroferroviário de passageiros'
-
-    elif grupo_priotario == 16:
-        grupo_priotario = 'Trabalhadores de Transporte Aéreo'
-
-    elif grupo_priotario == 17:
-        grupo_priotario = 'Trabalhadores portuários'
-
-    elif grupo_priotario == 18:
-        grupo_priotario = ' População Privada de Liberdade'
-
-    elif grupo_priotario == 19:
-        grupo_priotario = 'Funcionários do sistema de Privação de Liberdade'
+    elif grupoPrioritario == 6:
+        grupoPrioritario = 'Indigenas aldeados'
     
-    else:
-        print('Escolha uma das opções válidas.')
+    elif grupoPrioritario == 7:
+        grupoPrioritario = 'Povos de comunidades tradicionais (quilombolas) e ribeirinhas'
+
+    elif grupoPrioritario == 8:
+        grupoPrioritario = 'Idosos de 60 a 74 anos'
+
+    elif grupoPrioritario == 9:
+        grupoPrioritario = 'Comorbidades'
+
+    elif grupoPrioritario == 10:
+        grupoPrioritario = 'Pessoas em situação de rua'
+
+    elif grupoPrioritario == 11:
+        grupoPrioritario = 'Forças de segurança e salvamento'
+
+    elif grupoPrioritario == 12:
+        grupoPrioritario = 'Trabalhadores da educação'
+    
+    elif grupoPrioritario == 13:
+        grupoPrioritario = 'Pessoas com deficiência permanentemente severa'
+
+    elif grupoPrioritario == 14:
+        grupoPrioritario = 'Caminhoneiros'
+
+    elif grupoPrioritario == 15:
+        grupoPrioritario = 'Trabalhadores do Transporte Coletivo Rodoviário e Metroferroviário de passageiros'
+
+    elif grupoPrioritario == 16:
+        grupoPrioritario = 'Trabalhadores de Transporte Aéreo'
+
+    elif grupoPrioritario == 17:
+        grupoPrioritario = 'Trabalhadores portuários'
+
+    elif grupoPrioritario == 18:
+        grupoPrioritario = ' População Privada de Liberdade'
+
+    elif grupoPrioritario == 19:
+        grupoPrioritario = 'Funcionários do sistema de Privação de Liberdade'
     
     local = input('Digite o local de vacinação\n>>>')
     data = input('Data de vacinação\n>>>')
