@@ -11,6 +11,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins 
 ******************************************************************************************
 '''
 informacao_cadastrada = {}
+# Entrada de Dados
 def Cadastro():
 
     nome = input('Nome completo da pessoa vacinada\n>>>')
@@ -37,9 +38,10 @@ def Cadastro():
         teste_sexo = sexo.isdigit()
 
     sexo = int(sexo)
-    while sexo < 1 and sexo > 2:
+    while sexo < 1 or sexo > 2:
         print('Escolha uma das opções válidas.')
         sexo = input('Digite [1] para sexo Masculino ou [2] para sexo Feminino\n>>>')
+        sexo = int(sexo)
          
     if sexo == 1:
         sexo = 'Masculino'
@@ -127,10 +129,84 @@ def Cadastro():
         grupoPrioritario = 'Funcionários do sistema de Privação de Liberdade'
     
     local = input('Digite o local de vacinação\n>>>')
-    data = input('Data de vacinação\n>>>')
-    hora = input('Horário de vacinação\n>>>')
-    fabricante = int(input('Digite [1] se a vacina que foi aplicada é Coronavac ou [2] se foi a Astrazeneca\n>>>'))
+
+    data = input('Data de vacinação (ddmmaaaa)\n>>>')
+    teste_data = data.isdigit()
+    while teste_data is False:
+        print('A data deve conter somente números.')
+        data = input('>>>')
+        teste_data = data.isdigit()
+    data = data[0:2] + '/' + data[2:4] + '/' + data[4:8]
+
+    horario = input('Horário de vacinação (hhmm)\n>>>')
+    teste_horario = horario.isdigit()
+
+    if teste_horario is False:
+        while teste_horario is False:
+            print('A horario deve conter somente números.')
+            horario = input('>>>')
+            teste_horario = horario.isdigit()
+        
+    else:
+        horario = int(horario)
+        hora = horario // 100
+        minuto = horario % 100
+
+        while 0 > hora or hora > 23:
+            print('Digite uma hora válida.')
+            horario = input('>>>')
+            horario = int(horario)
+            hora = horario // 100
+            minuto = horario % 100
+        
+        while 0 > minuto or minuto > 59:
+            print('Digite um horário válido.')
+            horario = input('>>>')
+            horario = int(horario)
+            hora = horario // 100
+            minuto = horario % 100
+    
+        horario = str(hora) + ':' + str(minuto)
+    
+
+    fabricante = input('Digite [1] se a vacina que foi aplicada é Coronavac ou [2] se foi a Astrazeneca\n>>>')
+    teste_fabricante = fabricante.isdigit()
+    while teste_fabricante is False:
+        print('Escolha uma opção válida.')
+        fabricante = input('>>>')
+        teste_fabricante = fabricante.isdigit()
+
+    fabricante = int(fabricante)
+
+    while fabricante < 1 or fabricante > 2:
+        print('Escolha uma das opções válidas.')
+        fabricante = input('Digite [1] se a vacina que foi aplicada é Coronavac ou [2] se foi a Astrazeneca\n>>>')
+        fabricante = int(fabricante)
+            
+    if fabricante == 1:
+        fabricante = 'Coronavac'
+    else:
+        fabricante = 'Astrazeneca'
+
     lote = input('Lote da Vacina\n>>>')
-    dose = int(input('Digite [1] se a dose aplicada foi a PRIMEIRA ou [2] se foi a SEGUNDA dose\n>>>'))
+
+    dose = input('Digite [1] se a dose aplicada foi a PRIMEIRA ou [2] se foi a SEGUNDA dose\n>>>')
+    teste_dose = dose.isdigit()
+    while teste_dose is False:
+        print('Escolha uma opção válida.')
+        dose = input('>>>')
+        teste_dose = dose.isdigit()
+
+    dose = int(dose)
+
+    while dose < 1 or dose > 2:
+        print('Escolha uma das opções válidas.')
+        dose = input('Digite [1] se a dose aplicada foi a PRIMEIRA ou [2] se foi a SEGUNDA dose\n>>>')
+        dose = int(dose)
+            
+    if dose == 1:
+        dose = 'Primeira'
+    else:
+        dose = 'Segunda'
 
 Cadastro()

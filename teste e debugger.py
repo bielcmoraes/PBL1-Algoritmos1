@@ -1,19 +1,20 @@
-sexo = str(input('Digite [1] para sexo Masculino ou [2] para sexo Feminino\n>>>'))
-teste_sexo = sexo.isdigit()
-
-while teste_sexo is False:
+dose = input('Digite [1] se a dose aplicada foi a PRIMEIRA ou [2] se foi a SEGUNDA dose\n>>>')
+teste_dose = dose.isdigit()
+while teste_dose is False:
     print('Escolha uma opção válida.')
-    sexo = input('>>>')
-    teste_sexo = sexo.isdigit()
+    dose = input('>>>')
+    teste_dose = dose.isdigit()
 
-sexo = int(sexo)
-while sexo < 1 and sexo > 2:
+dose = int(dose)
+
+while dose < 1 or dose > 2:
     print('Escolha uma das opções válidas.')
-    sexo = input('Digite [1] para sexo Masculino ou [2] para sexo Feminino\n>>>')
-    
-    
-if sexo == 1:
-    sexo = 'Masculino'
+    dose = input('Digite [1] se a dose aplicada foi a PRIMEIRA ou [2] se foi a SEGUNDA dose\n>>>')
+    dose = int(dose)
+        
+if dose == 1:
+    dose = 'Primeira'
+else:
+    dose = 'Segunda'
 
-if sexo == 2:
-      sexo = 'Feminino'
+print(dose)
