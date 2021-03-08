@@ -23,10 +23,12 @@ def Cadastro():
 
     cpf = input('CPF da pessoa vacinada (somente números)\n>>>') #lembrar de dizer pq ficou strg
     teste_cpf = cpf.isdigit()
-    while teste_cpf is False:
-        print('O CPF deve conter somente números.')
+    tamanho_cpf = len(cpf)
+    while teste_cpf is False or tamanho_cpf != 11:
+        print('O CPF deve conter 11 digitos numericos.')
         cpf = input('>>>')
         teste_cpf = cpf.isdigit()
+        tamanho_cpf = len(cpf)
     cpf = cpf[0:3] + '.' + cpf[3:6] + '.' + cpf[6:9] + '-' + cpf[9:12]
     
     sexo = str(input('Digite [1] para sexo Masculino ou [2] para sexo Feminino\n>>>'))
@@ -165,7 +167,19 @@ def Cadastro():
             horario = int(horario)
             hora = horario // 100
             minuto = horario % 100
-    
+        
+        if 6 < hora < 12:
+            periodo = 'Manhã'
+        
+        elif 12 < hora < 18:
+            periodo = 'Tarde'
+        
+        elif 18 < hora < 24:
+            periodo = 'Noite'
+        
+        else:
+            periodo = 'Madrugada'
+            
         horario = str(hora) + ':' + str(minuto)
     
 
