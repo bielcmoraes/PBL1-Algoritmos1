@@ -10,9 +10,10 @@ de outra autoria que não a minha está destacado com uma citação para o autor
 do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
 ******************************************************************************************
 '''
-informacao_cadastrada = {}
+informacao_cadastrada = []
 # Entrada de Dados
-def Cadastro():
+def Cadastro(informacao_cadastrada):
+    informacao_de_cadatro = []
 
     nome = input('Nome completo da pessoa vacinada\n>>>')
     teste_nome = nome.isdigit()
@@ -223,4 +224,30 @@ def Cadastro():
     else:
         dose = 'Segunda'
 
-Cadastro()
+    salvar = input('Digite [1] para salvar a informações ou [2] para começar novamente.\n>>>')
+    teste_salvar = salvar.isdigit()
+    while teste_salvar is False:
+        print('Escolha uma opção válida.')
+        salvar = input('>>>')
+        teste_salvar = dose.isdigit()
+    
+    salvar = int(salvar)
+    if salvar != 1:
+        exit()
+    else:
+        informacao_de_cadatro.append(nome)
+        informacao_de_cadatro.append(cpf)
+        informacao_de_cadatro.append(sexo)
+        informacao_de_cadatro.append(grupoPrioritario)
+        informacao_de_cadatro.append(local)
+        informacao_de_cadatro.append(data)
+        informacao_de_cadatro.append(horario)
+        informacao_de_cadatro.append(periodo)
+        informacao_de_cadatro.append(fabricante)
+        informacao_de_cadatro.append(lote)
+        informacao_de_cadatro.append(dose)
+
+    
+    informacao_cadastrada.append(informacao_de_cadatro)
+
+Cadastro(informacao_cadastrada)
