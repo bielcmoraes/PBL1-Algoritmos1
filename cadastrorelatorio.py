@@ -10,10 +10,11 @@ de outra autoria que não a minha está destacado com uma citação para o autor
 do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
 ******************************************************************************************
 '''
-informacao_cadastrada = []
+
 # Entrada de Dados
-def Cadastro(informacao_cadastrada):
-    informacao_de_cadatro = []
+informacao_total = []
+def Cadastro(informacao_total):
+    informacao_de_cadatro = {}
 
     nome = input('Nome completo da pessoa vacinada\n>>>')
     teste_nome = nome.isdigit()
@@ -78,7 +79,7 @@ def Cadastro(informacao_cadastrada):
         grupoPrioritario = 'Trabalhadores da saúde'
 
     elif grupoPrioritario == 2:
-        grupoPrioritario = 'Idoso > 75 anos'
+        grupoPrioritario = 'Idosos > 75 anos'
     
     elif grupoPrioritario == 3:
         grupoPrioritario = 'Idosos ILPI > 60 anos'
@@ -170,7 +171,7 @@ def Cadastro(informacao_cadastrada):
             minuto = horario % 100
         
         if 6 < hora < 12:
-            periodo = 'Manhã'
+            periodo = 'Manha'
         
         elif 12 < hora < 18:
             periodo = 'Tarde'
@@ -235,19 +236,115 @@ def Cadastro(informacao_cadastrada):
     if salvar != 1:
         exit()
     else:
-        informacao_de_cadatro.append(nome)
-        informacao_de_cadatro.append(cpf)
-        informacao_de_cadatro.append(sexo)
-        informacao_de_cadatro.append(grupoPrioritario)
-        informacao_de_cadatro.append(local)
-        informacao_de_cadatro.append(data)
-        informacao_de_cadatro.append(horario)
-        informacao_de_cadatro.append(periodo)
-        informacao_de_cadatro.append(fabricante)
-        informacao_de_cadatro.append(lote)
-        informacao_de_cadatro.append(dose)
-
+        informacao_de_cadatro['nome'] = nome
+        informacao_de_cadatro['cpf'] = cpf
+        informacao_de_cadatro['sexo'] = sexo
+        informacao_de_cadatro['grupo_prioritario'] = grupoPrioritario
+        informacao_de_cadatro['local'] = local
+        informacao_de_cadatro['data'] = data
+        informacao_de_cadatro['horario'] = horario
+        informacao_de_cadatro['periodo'] = periodo
+        informacao_de_cadatro['fabricante'] = fabricante
+        informacao_de_cadatro['lote'] = lote
+        informacao_de_cadatro['dose'] = dose
     
-    informacao_cadastrada.append(informacao_de_cadatro)
+    informacao_total.append(informacao_de_cadatro)
 
-Cadastro(informacao_cadastrada)
+
+#Saída de Dados
+def Relatorio(informacao_total):
+    
+    quantidadeVacinados = 0
+    primeiraDose = 0
+    segundaDose = 0
+    coronavac = 0
+    astrazeneca = 0
+    quantidadeIdosos = 0
+    vacinadosManha = 0
+    vacinadosTarde = 0
+    quantidadeMasculino = 0
+    quantidadefeminino = 0
+    
+    for pessoa_vacinada in informacao_total:
+        quantidadeVacinados += 1
+        informacao = pessoa_vacinada.values()
+        for dado in informacao:
+
+            if dado == 'Primeira':
+                primeiraDose +=1
+            
+            if dado == 'Segunda':
+                segundaDose += 1
+    
+            if dado == 'Coronavac':
+                coronavac += 1
+                porcentagemCoronavac = (coronavac*100) / quantidadeVacinados
+                
+                porcentagemAstrazeneca = (astrazeneca*100) / quantidadeVacinados
+    
+            if dado == 'Idosos':
+                quantidadeIdosos +=1
+                porcentagemIdosos = (quantidadeIdosos*100) / quantidadeVacinados
+    
+            if dado == 'Manha':
+                vacinadosManha += 1
+                porcentagemManha = (vacinadosManha*100) / quantidadeVacinados
+
+                porcentagemTarde = 100 - porcentagemManha
+
+            if dado == 'Masculino':
+                quantidadeMasculino += 1
+                porcentagemMasculino = (quantidadeMasculino*100) / quantidadeVacinados
+
+                porcentagemFeminino = 100 - porcentagemMasculino
+
+    print('%d pessoas foram vacinadas e %d doses foram aplicadas') %(quantidadeVacinados, primeiraDose)
+    print('%d pessoas receberam a 1ª dose e %d pessoas receberam a segunda dose') %(primeiraDose, segundaDose)
+    print('%.2f das pessoas receberam a vacina Coronavac e %.2f receberam Astrazeneca') %(porcentagemCoronavac, porcentagemAstrazeneca)
+    print('%.2f dos vacinados são idosos') %porcentagemIdosos
+    print('%.2f das vacinas foram aplicadas pela manhã e %.2f foram aplicadas pela tarde') %(porcentagemManha, porcentagemTarde)
+    print('%2.f dos vacinados são do sexo Masculino e %.2f são do sexo feminino') %(porcentagemMasculino, porcentagemFeminino)
+
+#Menu do programa
+def Linhas(tam = 84):
+    return('_')*tam
+
+def Menu():
+    print(Linhas())
+    print('\nBem vindo ao cadastro de vacinados contra a COVID-19!!!')
+    print(Linhas())
+    
+    def Opcoes():
+        print('Digite [1] para realizar um cadastro')
+        print('Digite [2] para visualizar o relatorio')
+        opcaoMenu = input('Digite [3] para sair\n>>>')
+        testeOpcaoMenu = opcaoMenu.isdigit()
+        print(Linhas())
+
+        while opcaoMenu.isdigit() == False or len(opcaoMenu) >3:
+            print(Linhas())
+            print('Escolha uma opcao valida.')
+            print('Digite [1] para realizar um cadastro')
+            print('Digite [2] para visualizar o relatorio')
+            opcaoMenu = input('Digite [3] para sair\n>>>')
+            print(Linhas())
+        
+        return int(opcaoMenu)
+    
+    while Opcoes() == 1:
+        print(Linhas())
+        Cadastro(informacao_total)
+        print(Linhas())
+        Opcoes()
+        print(Linhas())
+    
+    while Opcoes() == 2:
+        print(Linhas())
+        Relatorio(informacao_total)
+        print(Linhas())
+        Opcoes()
+        print(Linhas())
+        
+
+
+Menu()
