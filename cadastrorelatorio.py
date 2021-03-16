@@ -253,57 +253,85 @@ def Cadastro(informacao_total):
 
 #Saída de Dados
 def Relatorio(informacao_total):
-    
-    quantidadeVacinados = 0
-    primeiraDose = 0
-    segundaDose = 0
-    coronavac = 0
-    astrazeneca = 0
-    quantidadeIdosos = 0
-    vacinadosManha = 0
-    vacinadosTarde = 0
-    quantidadeMasculino = 0
-    quantidadefeminino = 0
-    
-    for pessoa_vacinada in informacao_total:
-        quantidadeVacinados += 1
-        informacao = pessoa_vacinada.values()
-        for dado in informacao:
+    if not informacao_total:
+        print('Não existe pessoas cadastradas!!!')
+    else:
+        quantidadeVacinados = 0
+        primeiraDose = 0
+        segundaDose = 0
+        coronavac = 0
+        astrazeneca = 0
+        quantidadeIdosos = 0
+        vacinadosManha = 0
+        vacinadosTarde = 0
+        quantidadeMasculino = 0
+        quantidadefeminino = 0
+        
+        for pessoa_vacinada in informacao_total:
+            quantidadeVacinados += 1
+            informacao = pessoa_vacinada.values()
+            for dado in informacao:
 
-            if dado == 'Primeira':
-                primeiraDose +=1
-            
-            if dado == 'Segunda':
-                segundaDose += 1
-    
-            if dado == 'Coronavac':
-                coronavac += 1
-                porcentagemCoronavac = (coronavac*100) / quantidadeVacinados
+                if dado == 'Primeira':
+                    primeiraDose +=1
                 
-                porcentagemAstrazeneca = (astrazeneca*100) / quantidadeVacinados
-    
-            if dado == 'Idosos':
-                quantidadeIdosos +=1
-                porcentagemIdosos = (quantidadeIdosos*100) / quantidadeVacinados
-    
-            if dado == 'Manha':
-                vacinadosManha += 1
-                porcentagemManha = (vacinadosManha*100) / quantidadeVacinados
+                if dado == 'Segunda':
+                    segundaDose += 1
+        
+        print('%d pessoas foram vacinadas e %d doses foram aplicadas' %(quantidadeVacinados, primeiraDose))
+        print('%d pessoas receberam a 1ª dose e %d pessoas receberam a segunda dose' %(primeiraDose, segundaDose))
+        
+        for pessoa_vacinada in informacao_total:
+            informacao = pessoa_vacinada.values()
+            for dado in informacao:
+        
+                if dado == 'Coronavac':
+                    coronavac += 1
+                    porcentagemCoronavac = (coronavac*100) / quantidadeVacinados
+                    
+                elif dado == 'Astrazeneca':
+                    astrazeneca += 1
+                    porcentagemAstrazeneca = (astrazeneca*100) / quantidadeVacinados
+        
+        print('%.2f das pessoas receberam a vacina Coronavac e %.2f receberam Astrazeneca' %(porcentagemCoronavac, porcentagemAstrazeneca))
+        
+        for pessoa_vacinada in informacao_total:
+            informacao = pessoa_vacinada.values()
+            for dado in informacao:
+        
+                if dado == 'Idosos':
+                    quantidadeIdosos +=1
+                    porcentagemIdosos = (quantidadeIdosos*100) / quantidadeVacinados
+        
+        print('%.2f dos vacinados são idosos' %porcentagemIdosos) 
+        
+        for pessoa_vacinada in informacao_total:
+            informacao = pessoa_vacinada.values()
+            for dado in informacao:
 
-                porcentagemTarde = 100 - porcentagemManha
+                if dado == 'Manha':
+                    vacinadosManha += 1
+                    porcentagemManha = (vacinadosManha*100) / quantidadeVacinados
+                
+                elif dado == 'Tarde':
+                    vacinadosTarde += 1
+                    porcentagemTarde = (vacinadosTarde*100) / quantidadeVacinados
 
-            if dado == 'Masculino':
-                quantidadeMasculino += 1
-                porcentagemMasculino = (quantidadeMasculino*100) / quantidadeVacinados
+        print('%.2f das vacinas foram aplicadas pela manhã e %.2f foram aplicadas pela tarde' %(porcentagemManha, porcentagemTarde))
 
-                porcentagemFeminino = 100 - porcentagemMasculino
+        for pessoa_vacinada in informacao_total:
+            informacao = pessoa_vacinada.values()
+            for dado in informacao:
 
-    print('%d pessoas foram vacinadas e %d doses foram aplicadas') %(quantidadeVacinados, primeiraDose)
-    print('%d pessoas receberam a 1ª dose e %d pessoas receberam a segunda dose') %(primeiraDose, segundaDose)
-    print('%.2f das pessoas receberam a vacina Coronavac e %.2f receberam Astrazeneca') %(porcentagemCoronavac, porcentagemAstrazeneca)
-    print('%.2f dos vacinados são idosos') %porcentagemIdosos
-    print('%.2f das vacinas foram aplicadas pela manhã e %.2f foram aplicadas pela tarde') %(porcentagemManha, porcentagemTarde)
-    print('%2.f dos vacinados são do sexo Masculino e %.2f são do sexo feminino') %(porcentagemMasculino, porcentagemFeminino)
+                if dado == 'Masculino':
+                    quantidadeMasculino += 1
+                    porcentagemMasculino = (quantidadeMasculino*100) / quantidadeVacinados
+                
+                elif dado == 'feminino':
+                    quantidadefeminino += 1
+                    porcentagemFeminino = (quantidadefeminino*100) / quantidadeVacinados
+        
+        print('%2.f dos vacinados são do sexo Masculino e %.2f são do sexo feminino') %(porcentagemMasculino, porcentagemFeminino)
 
 #Menu do programa
 def Linhas(tam = 84):
@@ -344,7 +372,6 @@ def Menu():
         print(Linhas())
         Opcoes()
         print(Linhas())
-        
 
-
+     
 Menu()
